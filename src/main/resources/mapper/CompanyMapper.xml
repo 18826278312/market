@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.Company">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="gps" jdbcType="VARCHAR" property="gps" />
+    <result column="gaode" jdbcType="VARCHAR" property="gaode" />
+    <result column="baidu" jdbcType="VARCHAR" property="baidu" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, company_name, gps, gaode, baidu
+  </sql>
+</mapper>

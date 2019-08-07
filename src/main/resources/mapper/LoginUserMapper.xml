@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.LoginUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.LoginUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="check_code" jdbcType="VARCHAR" property="checkCode" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+  </resultMap>
+  
+  <select id="selectByPhone" parameterType="String" resultMap="BaseResultMap">
+		select * from login_user where phone = #{phone};
+  </select>
+  <update id="updateByPhone" parameterType="String">
+  	update login_user set login_time = NOW() where phone = #{phone};
+  </update>
+</mapper>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+	<title>市场部-微区域操作页面</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+<style type="text/css">  
+    html{height:100%}  
+    body{height:100%;margin:0px;padding:0px}
+    td{font-size:14px !important}
+	.center{float:left;height:100%;width:calc(100% - 400px);overflow:hidden;position:relative;}  
+	.right{float:left;height:100%;width:400px;overflow-y:scroll;}
+	.amap-marker-label{
+        border: 0;
+        background-color: transparent;
+        color:#FFFFFF;
+        font-size:18px;
+    }
+    label{
+    	color:blue
+    }
+</style>
+</head>
+<body>
+	<div class="center">
+		<div style="z-index: 9999; position:absolute;left: 20px; top: 10px;">
+			<button id="gaodeAddress" class="btn btn-primary" disabled="disabled">切换高德地图</button>
+			<button id="googleAddress" class="btn btn-primary">切换卫星地图</button><br><br>
+			<input id="addressName" type="text" style="padding-left:10px;width:180px;height:30px;">
+	        <button id="submitAddress" class="btn btn-sm btn-primary">搜索</button>
+	        <button id="cancelAddress" class="btn btn-sm btn-primary" style="display:none;">收起</button>
+	        <div style="background-color:#FFFFFF;width:281px;" id="addressList"></div>
+		</div>
+		<div id="map" style="width:100%;height: 100%;overflow: hidden;">
+	</div>
+	</div>
+	<div id="right" class="right">
+		<span class="list-group-item active">
+		 	区域操作
+		</span>
+		<div class="panel-body">
+			<div>
+				<span style="margin-top:10px;font-weight:bold;float:left;">市:&nbsp;&nbsp;</span>
+		        <select id="city" style="margin-top:10px;font-size:15px;float:left;">
+		          	<option value="汕头市">汕头市</option>
+		        </select>
+		        <br><br>
+	        </div>
+	        <div>
+				<span style="margin-top:10px;font-weight:bold;float:left;">分公司:&nbsp;&nbsp;</span>
+		        <select id="area" style="margin-top:10px;font-size:15px;float:left;">
+		          	<option value="">-分公司-</option>
+		          	<option value="金平分公司">金平分公司</option>
+		          	<option value="龙湖分公司">龙湖分公司</option>
+		          	<option value="潮阳分公司">潮阳分公司</option>
+		          	<option value="潮南分公司">潮南分公司</option>
+		          	<option value="澄海分公司">澄海分公司</option>
+		          	<option value="南澳分公司">南澳分公司</option>
+		        </select>
+		         <br><br>
+	        </div>
+	        <div>
+				<span style="margin-top:10px;font-weight:bold;float:left;">业务网格:&nbsp;&nbsp;</span>
+		        <select id="part" style="margin-top:10px;font-size:15px;float:left;">
+		          	<option value="">-业务网格-</option>
+		        </select>
+		         <br><br>
+	        </div>
+	        <div>
+				<span style="margin-top:10px;font-weight:bold;float:left;">责任田:&nbsp;&nbsp;</span>
+		        <select id="town" style="margin-top:10px;font-size:15px;float:left;">
+		          	<option value="">-责任田-</option>
+		        </select>
+		         <br><br>
+	        </div>
+	        <div>
+				<span style="margin-top:10px;font-weight:bold;float:left;">微区域:&nbsp;&nbsp;</span>
+		        <select id="region" style="margin-top:10px;font-size:15px;float:left;">
+		          	<option value="">显示全部</option>
+		        </select>
+		         <br><br>
+	        </div>
+	        <div id="power" style="color:red;font-weight:bold;"></div><br>
+	        <input type="button" id="add" class="btn btn-sm btn-primary" disabled="disabled" value="新增" onclick="add()"/>
+	        <input type="button" id="edit" class="btn btn-sm btn-primary" disabled="disabled" style="margin-left:10px;" value="编辑" onclick="edit()"/>
+			<input type="button" id="remove" class="btn btn-sm btn-primary" disabled="disabled" style="margin-left:10px;" value="删除" onclick="remove()"/>
+			<br><br>
+			<span style="font-weight:bold;float:left;">微区域名称:&nbsp;&nbsp;</span>
+			<input type="text" id="regionName" disabled="disabled">
+			<span id="regionNameInfo" style="color:red;"></span>
+			<br><br>
+			<span style="font-weight:bold;float:left;">责任人姓名:&nbsp;&nbsp;</span>
+			<input type="text" id="dutyUser" disabled="disabled">
+			<span id="dutyUserInfo" style="color:red;"></span>
+			<br><br>
+			<span style="font-weight:bold;float:left;">portal账号:&nbsp;&nbsp;</span>
+			<input type="text" id="portal" disabled="disabled">
+			<span id="portalInfo" style="color:red;"></span>
+			<br><br>
+			<span style="font-weight:bold;float:left;">电话号码:&nbsp;&nbsp;</span>
+			<input type="text" id="telephone" disabled="disabled">
+			<span id="telephoneInfo" style="color:red;"></span>
+			<br><br>
+			<span style="font-weight:bold;float:left;">场景标签:&nbsp;&nbsp;</span>
+			<label><input disabled="disabled" name="scenesLabel" type="checkbox" value="商业中心" />商业中心 </label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="scenesLabel" type="checkbox" value="厂园" />厂园 </label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="scenesLabel" type="checkbox" value="城中村" />城中村</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="scenesLabel" type="checkbox" value="校园" />校园 </label>
+			<label><input disabled="disabled" name="scenesLabel" type="checkbox" value="高商铺宽带占比" />高商铺宽带占比</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="scenesLabel" type="checkbox" value="高住宅小区宽带占比" />高住宅小区宽带占比</label>
+			<label><input disabled="disabled" name="scenesLabel" type="checkbox" value="高农村宽带占比" />高农村宽带占比</label>
+			<br><br>
+			<span style="font-weight:bold;float:left;">业务标签:&nbsp;&nbsp;</span>
+			<label><input disabled="disabled" name="businessLabel" type="checkbox" value="低占小区" />低占小区</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="businessLabel" type="checkbox" value="新增高危区域" />新增高危区域</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="businessLabel" type="checkbox" value="低固移融合" />低固移融合</label>
+			<br><br>
+			<span style="font-weight:bold;float:left;">通信特征标签:&nbsp;&nbsp;</span>
+			<label><input disabled="disabled" name="featureLabel" type="checkbox" value="低家庭网" />低家庭网</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="featureLabel" type="checkbox" value="外来工聚集" />外来工聚集</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="featureLabel" type="checkbox" value="低龄聚集" />低龄聚集</label>
+			<label><input disabled="disabled" name="featureLabel" type="checkbox" value="是否高价值" />高价值</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="featureLabel" type="checkbox" value="是否低价值" />低价值</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="featureLabel" type="checkbox" value="是否高流量" />高流量</label>
+			<label><input disabled="disabled" name="featureLabel" type="checkbox" value="是否低流量" />低流量</label>
+			<label><input disabled="disabled" style="margin-left:10px;" name="featureLabel" type="checkbox" value="是否高话务" />高话务</label>
+			<label><input disabled="disabled" name="featureLabel" type="checkbox" value="是否低话务" />低话务</label>
+			<br><br>
+			<input type="button" id="save" class="btn btn-sm btn-primary" disabled="disabled" value="保存" onclick="save()"/>
+			<input type="button" id="cancel" class="btn btn-sm btn-primary" disabled="disabled" style="margin-left:10px;" value="取消" onclick="cancel()"/><br><br>
+			<span style="font-weight:bold">右击地址：</span>
+			<span id="rightClick"></span><br><br>
+			<table id="gridTable" class="table table-bordered">
+				<tr class="success">
+					<th>
+						微网格列表
+						<button style="float:right" id="gridButton" disabled="disabled" type="button" class="btn btn-xs btn-info">显示微网格</button>
+						<button style="float:right;margin-right:10px" id="next" disabled="disabled" type="button" class="btn btn-xs btn-info">下一页</button>
+		     			<button style="float:right;margin-right:10px" id="previous" disabled="disabled" type="button" class="btn btn-xs btn-info">上一页</button>
+					</th>
+				</tr>
+			</table>
+        </div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.12.3.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://webapi.amap.com/maps?v=1.4.10&key=a861250d1ab092cde594c6784a7c507c&plugin=AMap.RectangleEditor,AMap.MouseTool,AMap.Polyline,AMap.Scale,AMap.CustomLayer,AMap.Heatmap,AMap.DistrictSearch,AMap.MouseTool"></script>
+<script type="text/javascript" src="../js/smallRegion.js"></script>
+</html> 

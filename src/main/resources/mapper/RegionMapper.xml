@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RegionMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.Region">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="business_name" jdbcType="VARCHAR" property="businessName" />
+    <result column="duty_name" jdbcType="VARCHAR" property="dutyName" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+    <result column="ct_gps" jdbcType="VARCHAR" property="ctGps" />
+    <result column="ct_baidu" jdbcType="VARCHAR" property="ctBaidu" />
+    <result column="ct_gaode" jdbcType="VARCHAR" property="ctGaode" />
+    <result column="polygon_gps" jdbcType="VARCHAR" property="polygonGps" />
+    <result column="polygon_baidu" jdbcType="VARCHAR" property="polygonBaidu" />
+    <result column="polygon_gaode" jdbcType="VARCHAR" property="polygonGaode" />
+    <result column="baidu_city" jdbcType="VARCHAR" property="baiduCity" />
+    <result column="baidu_area" jdbcType="VARCHAR" property="baiduArea" />
+    <result column="baidu_town" jdbcType="VARCHAR" property="baiduTown" />
+    <result column="baidu_road" jdbcType="VARCHAR" property="baiduRoad" />
+    <result column="baidu_name" jdbcType="VARCHAR" property="baiduName" />
+    <result column="gaode_city" jdbcType="VARCHAR" property="gaodeCity" />
+    <result column="gaode_area" jdbcType="VARCHAR" property="gaodeArea" />
+    <result column="gaode_town" jdbcType="VARCHAR" property="gaodeTown" />
+    <result column="gaode_road" jdbcType="VARCHAR" property="gaodeRoad" />
+    <result column="gaode_name" jdbcType="VARCHAR" property="gaodeName" />
+    <result column="region_size" jdbcType="DOUBLE" property="regionSize" />
+    <result column="duty_user" jdbcType="VARCHAR" property="dutyUser" />
+    <result column="portal" jdbcType="VARCHAR" property="portal" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="scenes_label" jdbcType="VARCHAR" property="scenesLabel" />
+    <result column="business_label" jdbcType="VARCHAR" property="businessLabel" />
+    <result column="feature_label" jdbcType="VARCHAR" property="featureLabel" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, company_name, business_name, duty_name, region_name, ct_gps, ct_baidu, ct_gaode, 
+    polygon_gps, polygon_baidu, polygon_gaode, baidu_city, baidu_area, baidu_town, baidu_road, 
+    baidu_name, gaode_city, gaode_area, gaode_town, gaode_road, gaode_name, region_size, 
+    duty_user, portal, telephone, scenes_label, business_label, feature_label, time
+  </sql>
+  
+  <select id="selectRegion" resultMap="BaseResultMap" parameterType="String">
+  	select * from region where company_name = #{companyName} and business_name = #{businessName} and duty_name = #{dutyName};
+  </select>
+</mapper>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+	<title>市场部-微区域权限控制页面</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+		body{height:100%;margin:0px;padding:0px}
+		.pop{width:100%; height:100%; position:absolute;left:0px; top:0px; z-index:999;background-color:#CCCCCC;opacity:0.5;display:none;}
+		.point1{position:absolute;left:50%; top:50%;display:none;}
+        .pop1{width:500px; height:400px; position:absolute;padding:10px 10px 10px 10px;left:-250px; top:-250px; z-index:1000;background-color:#FFFFFF;display:none;}
+        .point2{position:absolute;left:50%; top:50%;display:none;}
+        .pop2{width:500px; height:250px; position:absolute;padding:10px 10px 10px 10px;left:-250px; top:-250px; z-index:1000;background-color:#FFFFFF;display:none;}
+	</style>
+</head>
+<body>
+	<div style="margin:20px 100px 0 100px">
+		<h2>权限控制</h2>
+		<table id="table" class="table table-bordered table-striped">
+		    <tr class="success">
+		      <th>用户手机号</th>
+		      <th>用户姓名</th>
+		      <th>用户所属分公司</th>
+		      <th>用户职位</th>
+		      <th>管理分公司</th>
+		      <th>管理业务网格</th>
+		      <th>管理责任田</th>
+		      <th style="width:200px;">操作</th>
+		    </tr>
+		</table>
+		<button id="addUser">新增用户</button>
+	</div>
+	
+	<div class="pop"></div>
+	<div class="point1">
+        <div class="pop1">
+        	<table style="width:480px;" class="table table-bordered table-striped">
+        		<tr class="success">
+			      <th>选择分公司</th>
+			      <th>选择业务网格</th>
+			      <th>选择责任田</th>
+			    </tr>
+			    <tr>
+			      <td>
+				      <select id="area1" style="margin-top:10px;font-size:15px;float:left;">
+			          	<option value="">-分公司-</option>
+			          	<option value="金平分公司">金平分公司</option>
+			          	<option value="龙湖分公司">龙湖分公司</option>
+			          	<option value="潮阳分公司">潮阳分公司</option>
+			          	<option value="潮南分公司">潮南分公司</option>
+			          	<option value="澄海分公司">澄海分公司</option>
+			          	<option value="南澳分公司">南澳分公司</option>
+			        </select>
+		          </td>
+			      <td>
+			      	<select id="area2" style="margin-top:10px;font-size:15px;float:left;">
+			          	<option value="">-分公司-</option>
+			          	<option value="金平分公司">金平分公司</option>
+			          	<option value="龙湖分公司">龙湖分公司</option>
+			          	<option value="潮阳分公司">潮阳分公司</option>
+			          	<option value="潮南分公司">潮南分公司</option>
+			          	<option value="澄海分公司">澄海分公司</option>
+			          	<option value="南澳分公司">南澳分公司</option>
+			        </select>
+			      </td>
+			      <td>
+			      	<select id="area3" style="margin-top:10px;font-size:15px;float:left;">
+			          	<option value="">-分公司-</option>
+			          	<option value="金平分公司">金平分公司</option>
+			          	<option value="龙湖分公司">龙湖分公司</option>
+			          	<option value="潮阳分公司">潮阳分公司</option>
+			          	<option value="潮南分公司">潮南分公司</option>
+			          	<option value="澄海分公司">澄海分公司</option>
+			          	<option value="南澳分公司">南澳分公司</option>
+			        </select>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td></td>
+			      <td>
+			      	<select id="part2" style="margin-top:10px;font-size:15px;float:left;">
+			          	<option value="">-业务网格-</option>
+			        </select>
+			      </td>
+			      <td>
+			      	<select id="part3" style="margin-top:10px;font-size:15px;float:left;">
+			          	<option value="">-业务网格-</option>
+			        </select>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td></td>
+			      <td></td>
+			      <td>
+			      	<select id="town3" style="margin-top:10px;font-size:15px;float:left;">
+		          		<option value="">-责任田-</option>
+		        	</select>
+			      </td>
+			    </tr>
+        	</table>
+        	<div>已选分公司<span id="company"></span></div><br>
+        	<div>已选业务网格<span id="business"></span></div><br>
+        	<div>已选责任田<span id="duty"></span></div><br>
+        	<button id="save">保存</button>
+        	<button id="close" style="margin-left:10px;">取消</button>
+        </div>
+    </div>
+    <div class="pop"></div>
+	<div class="point2">
+        <div class="pop2">
+        	手机号：<input id="telephone" /><br><br>
+        	用户姓名：<input id="userName"/><br><br>
+        	分公司：<select id="companySelect" style="font-size:15px;">
+			          	<option value="">-分公司-</option>
+			          	<option value="金平分公司">金平分公司</option>
+			          	<option value="龙湖分公司">龙湖分公司</option>
+			          	<option value="潮阳分公司">潮阳分公司</option>
+			          	<option value="潮南分公司">潮南分公司</option>
+			          	<option value="澄海分公司">澄海分公司</option>
+			          	<option value="南澳分公司">南澳分公司</option>
+			        </select><br><br>
+        	职位：<input id="position"/><br><br>
+        	<button id="saveUser">保存</button>
+        	<button id="closeUser" style="margin-left:10px;">取消</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.12.3.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/power.js"></script>
+</html> 

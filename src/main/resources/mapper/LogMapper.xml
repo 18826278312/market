@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.Log">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, telephone, user_name, company, position, action, time
+  </sql>
+  <select id="selectLog" resultMap="BaseResultMap" parameterType="String">
+  	select * from log where telephone like "%${name}%" or user_name like "%${name}%" or company like "%${name}%" or 
+  		position like "%${name}%" or action like "%${name}%" order by id desc
+  </select>
+</mapper>
